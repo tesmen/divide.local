@@ -1,0 +1,25 @@
+server {
+    server_name divide.local www.divide.local;
+    root /home/tesmen/var/www/divide.local;
+
+    index index.php;
+
+    #location ~ ^/(images|javascript|js|css|flash|media|static)/  {
+    #  expires 30d;
+    #}
+ 
+    # PROD
+    location ~ \.php$ {
+        fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+        fastcgi_split_path_info ^(.+\.php)(/.*)$;
+        include fastcgi_params;
+
+        fastcgi_param SCRIPT_FILENAME  $realpath_root$fastcgi_script_name;
+        fastcgi_param DOCUMENT_ROOT $realpath_root;
+
+        #internal;
+     }
+
+    error_log /home/tesmen/var/log/divide.local_error.log;
+    access_log /home/tesmen/var/log/divide.local_access.log;
+}

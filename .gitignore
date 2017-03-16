@@ -1,3 +1,4 @@
-vendor
-composer.phar
-files
+/vendor
+/composer.phar
+/files
+/.idea
